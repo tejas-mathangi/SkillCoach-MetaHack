@@ -1,3 +1,13 @@
+---
+title: SkillCoach Env
+emoji: 🧑‍🏫
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+tags:
+  - openenv
+---
 # SkillCoach — Socratic Debugging Tutor Environment
 
 > **Meta x PyTorch OpenEnv Hackathon (Round 1)**
