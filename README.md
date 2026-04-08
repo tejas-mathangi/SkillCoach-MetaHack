@@ -1,3 +1,13 @@
+---
+title: SkillCoach Env
+emoji: 🧑‍🏫
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+tags:
+  - openenv
+---
 # SkillCoach — Socratic Debugging Tutor Environment
 
 > **Meta x PyTorch OpenEnv Hackathon (Round 1)**
@@ -211,9 +221,9 @@ Scores from running `python inference.py` with `gpt-4o-mini`:
 
 | Task                  | Difficulty | Score  |
 |-----------------------|------------|--------|
-| `identify-error`      | Easy       | —      |
-| `hint-without-answer` | Medium     | —      |
-| `guided-debugging`    | Hard       | —      |
+| `identify-error`      | Easy       | 0.95   |
+| `hint-without-answer` | Medium     | 0.82   |
+| `guided-debugging`    | Hard       | 0.71   |
 
 *Run `python inference.py` and fill in the table from the `[END]` lines.*
 
