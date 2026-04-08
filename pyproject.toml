@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skillcoach"
+version = "1.0.0"
+description = "A Socratic debugging tutor environment where an AI agent teaches coding skills through hints and questions, never direct answers."
+authors = [
+  { name="SkillCoach Team" },
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "openenv>=0.1.0",
+    "pydantic>=2.0.0",
+    "openai>=1.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "httpx>=0.24.0",
+    "pyyaml>=6.0"
+]

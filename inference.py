@@ -38,9 +38,7 @@ from skillcoach_env import SkillCoachAction, SkillCoachEnv, SkillCoachObservatio
 
 API_BASE_URL: str = os.environ.get("API_BASE_URL", "https://api.openai.com/v1")
 MODEL_NAME: str = os.environ.get("MODEL_NAME", "gpt-4o-mini")
-HF_TOKEN: str = os.environ.get(
-    "HF_TOKEN", os.environ.get("OPENAI_API_KEY", "sk-placeholder")
-)
+HF_TOKEN: str | None = os.environ.get("HF_TOKEN")
 
 # Max steps per task (tasks 1 & 2 always finish in 1 step; task 3 needs ≤ 5)
 MAX_STEPS_EASY_MEDIUM: int = 8

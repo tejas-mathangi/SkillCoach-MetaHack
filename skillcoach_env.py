@@ -16,6 +16,7 @@ from __future__ import annotations
 from typing import Any, Optional
 
 from fastapi import Body, FastAPI
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, ConfigDict
 
 from tasks import GradeResult, TaskState, get_task, grade_response
@@ -246,6 +247,12 @@ class _StepRequest(BaseModel):
 
 
 # -- Endpoints ---------------------------------------------------------------
+
+@app.get("/")
+async def root():
+    """Redirect to the API documentation."""
+    return RedirectResponse(url="/docs")
+
 
 @app.post("/reset")
 async def http_reset(
