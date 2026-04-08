@@ -168,7 +168,7 @@ class SkillCoachEnv:
         next_student_msg = self._task_state.get_next_student_message(self._turn)
         obs = self._build_obs(next_student_msg)
 
-        reward = max(0.0, min(1.0, float(grade_result.score)))
+        reward = max(0.01, min(0.99, float(grade_result.score)))
         info = SkillCoachInfo(
             grader_feedback=grade_result.grader_feedback,
             hint_too_direct=grade_result.hint_too_direct,

@@ -124,7 +124,7 @@ async def run_checks() -> None:
             result = await env_ie2.step(action)
             check("step() returns 4-tuple", isinstance(result, tuple) and len(result) == 4)
             _obs2, reward, done, info = result
-            check(f"reward in [0.0, 1.0]", 0.0 <= reward <= 1.0, f"reward={reward:.3f}")
+            check(f"reward in [0.0, 1.0]", 0.0 < reward < 1.0, f"reward={reward:.3f}")
             check("done is bool", isinstance(done, bool))
             check("info is SkillCoachInfo", isinstance(info, SkillCoachInfo))
             check("info.grader_feedback is str", isinstance(info.grader_feedback, str))
@@ -161,7 +161,7 @@ async def run_checks() -> None:
                 gr = grade_response(task_name=tname, task_state=ts, response=resp, turn=1)
                 check(
                     f"grader '{tname}' score in [0,1]",
-                    0.0 <= gr.score <= 1.0,
+                    0.0 < gr.score < 1.0,
                     f"score={gr.score:.3f}",
                 )
         except Exception as exc:

@@ -338,7 +338,7 @@ def _grade_identify_error(scenario: dict[str, Any], response: str) -> GradeResul
 
     if not resp_lower:
         return GradeResult(
-            score=0.0,
+            score=0.01,
             grader_feedback="Empty response.",
             hint_too_direct=False,
             keywords_found=[],
@@ -361,7 +361,7 @@ def _grade_identify_error(scenario: dict[str, Any], response: str) -> GradeResul
     # Exact match on error category keyword
     if correct in resp_lower:
         return GradeResult(
-            score=1.0,
+            score=0.99,
             grader_feedback=f"Correctly identified error type '{correct}'.",
             hint_too_direct=False,
             keywords_found=[correct],
@@ -391,7 +391,7 @@ def _grade_identify_error(scenario: dict[str, Any], response: str) -> GradeResul
             )
 
     return GradeResult(
-        score=0.0,
+        score=0.01,
         grader_feedback="Irrelevant or empty response.",
         hint_too_direct=False,
         keywords_found=[],
@@ -408,17 +408,17 @@ def _grade_hint_without_answer(scenario: dict[str, Any], response: str) -> Grade
     Deterministic grader for the hint-without-answer task.
 
     Scoring algorithm:
-      1. Too short (<20 chars)          → 0.0 immediately
+      1. Too short (<20 chars)          → 0.01 immediately
       2. fix_keywords present           → penalty = 0.5
-      3. diagnostic_keywords counted    → keyword_score = count / total (capped 1.0)
+      3. diagnostic_keywords counted    → keyword_score = count / total (capped 0.99)
       4. Too long (>500 chars)          → score capped at 0.4
-      5. final = max(0.0, min(cap, keyword_score - penalty))
+      5. final = max(0.01, min(cap, keyword_score - penalty))
     """
     stripped = response.strip()
 
     if len(stripped) < 20:
         return GradeResult(
-            score=0.0,
+            score=0.01,
             grader_feedback="Response too short (< 20 characters).",
             hint_too_direct=False,
             keywords_found=[],
@@ -438,10 +438,10 @@ def _grade_hint_without_answer(scenario: dict[str, Any], response: str) -> Grade
 
     # Diagnostic keyword score
     diag_found = [kw for kw in diag_keywords if kw.lower() in resp_lower]
-    keyword_score = min(1.0, len(diag_found) / max(len(diag_keywords), 1))
+    keyword_score = min(0.99, len(diag_found) / max(len(diag_keywords), 1))
 
-    raw = max(0.0, keyword_score - penalty)
-    final_score = max(0.0, min(length_cap, raw))
+    raw = max(0.01, keyword_score - penalty)
+    final_score = max(0.01, min(length_cap, raw))
 
     feedback_parts: list[str] = []
     if fix_found:
@@ -479,7 +479,7 @@ def _grade_guided_turn(
     Score a single agent turn in the guided-debugging task.
 
     Returns:
-        per_turn_reward  — float in [0.0, 1.0]
+        per_turn_reward  — float in [0.01, 0.99]
         hint_too_direct  — bool
         keywords_found   — solution keywords found in response (bad if any)
     """
@@ -494,7 +494,7 @@ def _grade_guided_turn(
     answer_given = [kw for kw in solution_keywords if kw.lower() in resp_lower]
     no_answer_score = 0.5 if not answer_given else 0.0
 
-    per_turn_reward = max(0.0, min(1.0, question_score + no_answer_score))
+    per_turn_reward = max(0.01, min(0.99, question_score + no_answer_score))
     return per_turn_reward, bool(answer_given), answer_given
 
 

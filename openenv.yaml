@@ -30,4 +30,4 @@ observation_space:
   history: list
 action_space:
   response: string
-reward_range: [0.0, 1.0]
+reward_range: [0.01, 0.99]
